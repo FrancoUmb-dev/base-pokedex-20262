@@ -3,7 +3,7 @@
 **Nombre:** Sebastian Franco Umbacia
 
 ## Demo desplegada
-https://francoumb-dev.github.io/base-pokedex-20262/)
+https://francoumb-dev.github.io/base-pokedex-20262/
 
 ## Descripción
 
