@@ -5,7 +5,13 @@ import FondoEspacial from './components/FondoEspacial.jsx'
 
 function App() {
   return (
-    <BrowserRouter>
+    // basename: en GitHub Pages la app vive bajo "/base-pokedex-20262/" en
+    // vez de la raíz del dominio. import.meta.env.BASE_URL ya trae ese
+    // mismo prefijo (lo define "base" en vite.config.js), así que
+    // reutilizarlo acá evita escribir el nombre del repo dos veces y que
+    // se desincronicen. En local o en Vercel BASE_URL es "/", así que esto
+    // no cambia nada ahí.
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       {/* Se monta una sola vez acá arriba, fuera de <Routes>, para que las
           nebulosas/galaxias de fondo no se reinicien (ni se note el cambio)
           al navegar entre el selector y un universo. */}
