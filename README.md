@@ -3,7 +3,7 @@
 **Nombre:** Sebastian Franco Umbacia
 
 ## Demo desplegada
-(pegar aquí el link de Vercel una vez desplegado)
+https://francoumb-dev.github.io/base-pokedex-20262/)
 
 ## Descripción
 
