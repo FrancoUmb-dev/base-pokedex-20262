@@ -1,0 +1,76 @@
+.barra-busqueda-contenedor {
+  position: relative;
+  width: min(320px, 100%);
+}
+
+.barra-busqueda {
+  width: 100%;
+  font-family: var(--fuente-normal);
+  font-size: 0.95rem;
+  color: var(--texto);
+  background: rgba(8, 10, 28, 0.75);
+  border: 2px solid var(--azul-hud);
+  border-radius: 8px;
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.barra-busqueda::placeholder {
+  color: var(--texto-tenue);
+}
+
+.barra-busqueda:focus {
+  border-color: var(--amarillo);
+  box-shadow: 0 0 10px rgba(255, 203, 5, 0.5);
+}
+
+/* Desplegable de sugerencias: mismo lenguaje visual de HUD/terminal que el
+   resto de la app (fondo oscuro semitransparente, borde con glow). */
+.barra-busqueda__sugerencias {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  max-height: 280px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: var(--panel-bg);
+  border: 2px solid var(--panel-borde);
+  border-radius: 8px;
+  box-shadow: 0 0 18px rgba(255, 203, 5, 0.3);
+}
+
+.barra-busqueda__sugerencia {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 10px;
+  background: none;
+  border: none;
+  border-radius: 5px;
+  color: var(--texto);
+  text-align: left;
+  font-family: var(--fuente-normal);
+  font-size: 0.9rem;
+  transition: background 0.12s ease;
+}
+
+.barra-busqueda__sugerencia:hover {
+  background: rgba(255, 203, 5, 0.15);
+}
+
+.barra-busqueda__sugerencia-numero {
+  font-family: var(--fuente-pixel);
+  font-size: 0.6rem;
+  color: var(--texto-tenue);
+  min-width: 3.2em;
+}
+
+.barra-busqueda__sugerencia-nombre {
+  color: var(--texto);
+}

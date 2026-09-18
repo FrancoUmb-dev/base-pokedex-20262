@@ -1,0 +1,51 @@
+.filtro-tipo-contenedor {
+  position: relative;
+  width: fit-content;
+}
+
+.filtro-tipo__boton {
+  white-space: nowrap;
+}
+
+/* El panel de chips flota como un desplegable sobre el lienzo en vez de
+   empujar el resto del HUD hacia abajo cuando se abre. */
+.filtro-tipo {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  width: min(420px, 80vw);
+  padding: 12px;
+  background: var(--panel-bg);
+  border: 2px solid var(--panel-borde);
+  border-radius: 8px;
+  box-shadow: 0 0 18px rgba(255, 203, 5, 0.3);
+}
+
+.filtro-tipo__chip {
+  font-family: var(--fuente-normal);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--color-tipo);
+  background: rgba(8, 10, 28, 0.75);
+  border: 1.5px solid var(--color-tipo);
+  border-radius: 20px;
+  padding: 5px 10px;
+  opacity: 0.55;
+  transition: opacity 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.filtro-tipo__chip:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.filtro-tipo__chip--activo {
+  opacity: 1;
+  color: #1a1a1a;
+  background: var(--color-tipo);
+  box-shadow: 0 0 10px var(--color-tipo);
+}

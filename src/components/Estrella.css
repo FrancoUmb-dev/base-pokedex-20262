@@ -1,0 +1,72 @@
+.estrella {
+  position: absolute;
+  width: var(--tamano-estrella);
+  height: var(--tamano-estrella);
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--color-estrella);
+  box-shadow: 0 0 calc(var(--tamano-estrella) / 2) var(--color-estrella);
+  /* (x, y) representa el CENTRO de la estrella (según la fórmula
+     trigonométrica de Universo), pero left/top posicionan la esquina
+     superior izquierda del elemento. Este translate(-50%,-50%) corrige
+     ese desfase para que el centro visual coincida con (x, y). */
+  transform: translate(-50%, -50%);
+  /* "left" y "top" también se transicionan a propósito: apenas termina de
+     generarse la silueta del Pokémon emblema, Universo reubica todas las
+     estrellas de golpe (pasan del layout de respaldo por sectores a su
+     posición final sobre la silueta). Sin esta transición ese cambio se
+     vería como un salto brusco; con ella, las estrellas "vuelan" hasta
+     formar la constelación. */
+  transition: left 0.7s ease, top 0.7s ease, transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
+  animation: parpadeo-estrella 2.4s ease-in-out infinite;
+  cursor: pointer;
+}
+
+.estrella:hover,
+.estrella:focus-visible {
+  transform: translate(-50%, -50%) scale(1.6);
+  box-shadow: 0 0 calc(var(--tamano-estrella) * 1.4) var(--color-estrella);
+  z-index: 5;
+}
+
+/* Parpadeo/pulso continuo: anima el brillo (filter), no la opacidad, porque
+   la opacidad ya está reservada para reflejar el filtro de tipo activo. Si
+   animáramos "opacity" acá, pisaría constantemente el 0.15 que aplica
+   Universo a las estrellas descartadas por el filtro. */
+@keyframes parpadeo-estrella {
+  0%,
+  100% {
+    filter: brightness(0.8);
+  }
+  50% {
+    filter: brightness(1.4);
+  }
+}
+
+.estrella--encontrada {
+  z-index: 6;
+}
+
+/* Anillo pulsante mientras la cámara viaja hacia la estrella encontrada
+   por el buscador. */
+.estrella--encontrada::after {
+  content: '';
+  position: absolute;
+  inset: -14px;
+  border: 2px solid var(--amarillo);
+  border-radius: 50%;
+  animation: anillo-busqueda 1s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes anillo-busqueda {
+  0% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}

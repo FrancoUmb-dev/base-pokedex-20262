@@ -1,0 +1,129 @@
+.fondo-espacial {
+  position: fixed;
+  inset: 0;
+  /* Negativo a propósito: junto con isolation:isolate en #root (index.css),
+     esto lo deja siempre detrás del resto de la UI sin importar el orden
+     en que React monte cada página. */
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Nebulosas: manchas de color grandes y MUY difuminadas (filter:blur no se
+   puede aplicar directo a un gradiente de background-image, por eso estas
+   sí son elementos reales en vez de otra capa en index.css). */
+.nebulosa {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.85;
+  animation: derivar-nebulosa 30s ease-in-out infinite;
+}
+
+/* Cada nebulosa lleva una parada intermedia de color (además del centro y
+   el borde transparente): un simple "color -> transparente" se aplana
+   demasiado al pasarle un blur tan grande y casi no queda visible, sobre
+   todo en los tonos fríos (violeta/azul) que se confunden con el negro
+   azulado del fondo. La parada intermedia le da un núcleo más sólido que
+   sobrevive al desenfoque. */
+.nebulosa--1 {
+  top: 6%;
+  left: 4%;
+  width: 620px;
+  height: 620px;
+  background: radial-gradient(circle, rgba(150, 90, 255, 0.9), rgba(150, 90, 255, 0.35) 45%, transparent 72%);
+  animation-delay: 0s;
+}
+
+.nebulosa--2 {
+  top: 55%;
+  left: 68%;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(90, 150, 255, 0.85), rgba(90, 150, 255, 0.3) 45%, transparent 72%);
+  animation-delay: -10s;
+}
+
+.nebulosa--3 {
+  top: -8%;
+  left: 60%;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(255, 45, 95, 0.8), rgba(255, 45, 95, 0.25) 45%, transparent 72%);
+  animation-delay: -20s;
+}
+
+.nebulosa--4 {
+  top: 78%;
+  left: 6%;
+  width: 560px;
+  height: 560px;
+  background: radial-gradient(circle, rgba(90, 220, 130, 0.7), rgba(90, 220, 130, 0.2) 45%, transparent 72%);
+  animation-delay: -5s;
+}
+
+@keyframes derivar-nebulosa {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(3%, -3%) scale(1.08);
+  }
+}
+
+/* Galaxias lejanas: espiral (conic-gradient) + núcleo brillante (radial).
+   Un conic-gradient por sí solo se ve como un abanico de bordes duros (cada
+   parada de color es una línea recta desde el centro); para que se lea
+   como brazos espirales borrosos hacen falta dos cosas: paradas de color
+   graduales (que ya vienen "suaves" antes del blur) y un blur bastante más
+   fuerte que en las nebulosas de arriba, porque acá el efecto que
+   queremos tapar son líneas rectas, no un círculo. */
+.galaxia-lejana {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(9px);
+  opacity: 0.85;
+  background:
+    radial-gradient(circle at 50% 50%, #fff 0%, rgba(255, 255, 255, 0.7) 5%, transparent 16%),
+    conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      rgba(255, 255, 255, 0.7) 12deg,
+      rgba(255, 255, 255, 0.1) 40deg,
+      transparent 75deg,
+      transparent 150deg,
+      rgba(195, 210, 255, 0.6) 185deg,
+      rgba(195, 210, 255, 0.08) 215deg,
+      transparent 255deg,
+      transparent 330deg,
+      rgba(255, 255, 255, 0.45) 348deg,
+      transparent 360deg
+    );
+  animation: girar-galaxia-lejana 50s linear infinite;
+}
+
+.galaxia-lejana--1 {
+  top: 14%;
+  left: 76%;
+  width: 300px;
+  height: 300px;
+}
+
+.galaxia-lejana--2 {
+  top: 70%;
+  left: 8%;
+  width: 240px;
+  height: 240px;
+  animation-duration: 65s;
+  animation-direction: reverse;
+}
+
+@keyframes girar-galaxia-lejana {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
